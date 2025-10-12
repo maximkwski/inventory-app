@@ -1,18 +1,38 @@
 const express = require("express");
 const app = express();
+const path = require("path");
+
+
+const indexRouter = require("./routes/index");
+const categoryRoutes = require("./routes/categoryRoutes");
+const itemRoutes = require("./routes/itemRoutes");
 
 const PORT = process.env.PORT || 8000;
 
 app.set("view engine", "ejs");
 app.use(express.urlencoded({ extended: true }));
+app.use(express.static(path.join(__dirname, "public")));
 
-app.use("/", (req, res) => {
-    res.render('index')
+//routes
+app.use("/", indexRouter);
+app.use("/categories", categoryRoutes);
+app.use("/items", itemRoutes);
+
+//404 handler
+app.use((req, res) => {
+  res.status(404).render("404");
 });
+
+// Error handler
+app.use((err, req, res, next) => {
+  console.error(err.stack);
+  res.status(500).send("Something broke!");
+});
+
 
 app.listen(PORT, (error) => {
   if (error) {
     throw error;
   }
-  console.log(`Express app listening on port ${PORT}!`);
+  console.log(`🍺 Liquor Store Inventory listening on port ${PORT}!`);
 });
