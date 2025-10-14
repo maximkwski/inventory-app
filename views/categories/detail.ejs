@@ -1,64 +1,66 @@
 <%- include('../partials/header', { title: category.name }) %> <%-
 include('../partials/nav') %>
 
-<div class="container">
-  <div class="content-wrapper fade-in">
-    <div class="detail-header">
-      <div class="detail-info">
-        <h1><%= category.name %></h1>
-        <p class="text-muted"><%= category.description %></p>
+<main class="main-content">
+  <div class="container">
+    <div class="content-wrapper fade-in">
+      <div class="detail-header">
+        <div class="detail-info">
+          <h1><%= category.name %></h1>
+          <p class="text-muted"><%= category.description %></p>
+        </div>
+        <div class="detail-actions">
+          <a href="/categories/<%= category.id %>/edit" class="btn btn-primary"
+            >✏️ Edit</a
+          >
+          <form
+            action="/categories/<%= category.id %>/delete"
+            method="POST"
+            style="display: inline"
+            onsubmit="return confirm('Delete this category and all its items?')"
+          >
+            <button type="submit" class="btn btn-danger">🗑️ Delete</button>
+          </form>
+        </div>
       </div>
-      <div class="detail-actions">
-        <a href="/categories/<%= category.id %>/edit" class="btn btn-primary"
-          >✏️ Edit</a
-        >
-        <form
-          action="/categories/<%= category.id %>/delete"
-          method="POST"
-          style="display: inline"
-          onsubmit="return confirm('Delete this category and all its items?')"
-        >
-          <button type="submit" class="btn btn-danger">🗑️ Delete</button>
-        </form>
-      </div>
-    </div>
 
-    <h2>Items in this category (<%= items.length %>)</h2>
+      <h2>Items in this category (<%= items.length %>)</h2>
 
-    <% if (items.length === 0) { %>
-    <div class="empty-state">
-      <p>No items in this category yet.</p>
-      <a href="/items/new" class="btn btn-success">Add First Item</a>
-    </div>
-    <% } else { %>
-    <div class="grid">
-      <% items.forEach(item => { %>
-      <div class="card">
-        <h3><%= item.name %></h3>
-        <p><strong><%= item.brand %></strong></p>
-        <p class="price">$<%= parseFloat(item.price).toFixed(2) %></p>
-        <p>
-          <% if (item.stock_quantity > 20) { %>
-          <span class="stock-indicator stock-high"
-            >In Stock: <%= item.stock_quantity %></span
-          >
-          <% } else if (item.stock_quantity > 5) { %>
-          <span class="stock-indicator stock-medium"
-            >Low Stock: <%= item.stock_quantity %></span
-          >
-          <% } else { %>
-          <span class="stock-indicator stock-low"
-            >Very Low: <%= item.stock_quantity %></span
-          >
-          <% } %>
-        </p>
-        <p><%= item.alcohol_percentage %>% ABV | <%= item.volume_ml %>ml</p>
-        <a href="/items/<%= item.id %>">View Details →</a>
+      <% if (items.length === 0) { %>
+      <div class="empty-state">
+        <p>No items in this category yet.</p>
+        <a href="/items/new" class="btn btn-success">Add First Item</a>
       </div>
-      <% }) %>
+      <% } else { %>
+      <div class="grid">
+        <% items.forEach(item => { %>
+        <div class="card">
+          <h3><%= item.name %></h3>
+          <p><strong><%= item.brand %></strong></p>
+          <p class="price">$<%= parseFloat(item.price).toFixed(2) %></p>
+          <p>
+            <% if (item.stock_quantity > 20) { %>
+            <span class="stock-indicator stock-high"
+              >In Stock: <%= item.stock_quantity %></span
+            >
+            <% } else if (item.stock_quantity > 5) { %>
+            <span class="stock-indicator stock-medium"
+              >Low Stock: <%= item.stock_quantity %></span
+            >
+            <% } else { %>
+            <span class="stock-indicator stock-low"
+              >Very Low: <%= item.stock_quantity %></span
+            >
+            <% } %>
+          </p>
+          <p><%= item.alcohol_percentage %>% ABV | <%= item.volume_ml %>ml</p>
+          <a href="/items/<%= item.id %>">View Details →</a>
+        </div>
+        <% }) %>
+      </div>
+      <% } %>
     </div>
-    <% } %>
   </div>
-</div>
+</main>
 
 <%- include('../partials/footer') %>

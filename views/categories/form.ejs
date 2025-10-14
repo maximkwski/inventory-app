@@ -1,45 +1,47 @@
 <%- include('../partials/header', { title: title }) %> <%-
 include('../partials/nav') %>
 
-<div class="container">
-  <div class="content-wrapper fade-in">
-    <h1><%= title %></h1>
+<main class="main-content">
+  <div class="container">
+    <div class="content-wrapper fade-in">
+      <h1><%= title %></h1>
 
-    <form
-      action="<%= category ? `/categories/${category.id}/update` : '/categories' %>"
-      method="POST"
-    >
-      <div class="form-group">
-        <label for="name">Category Name *</label>
-        <input
-          type="text"
-          id="name"
-          name="name"
-          value="<%= category ? category.name : '' %>"
-          placeholder="e.g., Beer, Wine, Liquor"
-          required
-        />
-      </div>
+      <form
+        action="<%= category ? `/categories/${category.id}/update` : '/categories' %>"
+        method="POST"
+      >
+        <div class="form-group">
+          <label for="name">Category Name *</label>
+          <input
+            type="text"
+            id="name"
+            name="name"
+            value="<%= category ? category.name : '' %>"
+            placeholder="e.g., Beer, Wine, Liquor"
+            required
+          />
+        </div>
 
-      <div class="form-group">
-        <label for="description">Description</label>
-        <textarea
-          id="description"
-          name="description"
-          placeholder="Brief description of this category..."
-        >
+        <div class="form-group">
+          <label for="description">Description</label>
+          <textarea
+            id="description"
+            name="description"
+            placeholder="Brief description of this category..."
+          >
 <%= category ? category.description : '' %></textarea
-        >
-      </div>
+          >
+        </div>
 
-      <div class="btn-group">
-        <button type="submit" class="btn btn-success">
-          <%= category ? '💾 Update Category' : '➕ Create Category' %>
-        </button>
-        <a href="/categories" class="btn btn-secondary">Cancel</a>
-      </div>
-    </form>
+        <div class="btn-group">
+          <button type="submit" class="btn btn-success">
+            <%= category ? '💾 Update Category' : '➕ Create Category' %>
+          </button>
+          <a href="/categories" class="btn btn-secondary">Cancel</a>
+        </div>
+      </form>
+    </div>
   </div>
-</div>
+</main>
 
 <%- include('../partials/footer') %>

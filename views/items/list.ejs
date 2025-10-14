@@ -1,49 +1,51 @@
 <%- include('../partials/header', { title: 'All Items' }) %> <%-
 include('../partials/nav') %>
 
-<div class="container">
-  <div class="content-wrapper fade-in">
-    <h1>🍾 All Items</h1>
-    <a href="/items/new" class="btn btn-success">➕ Add New Item</a>
+<main class="main-content">
+  <div class="container">
+    <div class="content-wrapper fade-in">
+      <h1>🍾 All Items</h1>
+      <a href="/items/new" class="btn btn-success">➕ Add New Item</a>
 
-    <% if (items.length === 0) { %>
-    <div class="empty-state">
-      <h2>No items yet</h2>
-      <p>Start building your inventory by adding your first item!</p>
-      <a href="/items/new" class="btn btn-primary">Add Item</a>
-    </div>
-    <% } else { %>
-    <div class="grid">
-      <% items.forEach(item => { %>
-      <div class="card">
-        <span class="badge"><%= item.category_name %></span>
-        <h3><%= item.name %></h3>
-        <p>
-          <strong><%= item.brand %></strong> | <%= item.country_of_origin %>
-        </p>
-        <p class="price">$<%= parseFloat(item.price).toFixed(2) %></p>
-        <p>
-          <% if (item.stock_quantity > 20) { %>
-          <span class="stock-indicator stock-high"
-            >Stock: <%= item.stock_quantity %></span
-          >
-          <% } else if (item.stock_quantity > 5) { %>
-          <span class="stock-indicator stock-medium"
-            >Stock: <%= item.stock_quantity %></span
-          >
-          <% } else { %>
-          <span class="stock-indicator stock-low"
-            >Stock: <%= item.stock_quantity %></span
-          >
-          <% } %>
-        </p>
-        <p><%= item.alcohol_percentage %>% ABV | <%= item.volume_ml %>ml</p>
-        <a href="/items/<%= item.id %>">View Details →</a>
+      <% if (items.length === 0) { %>
+      <div class="empty-state">
+        <h2>No items yet</h2>
+        <p>Start building your inventory by adding your first item!</p>
+        <a href="/items/new" class="btn btn-primary">Add Item</a>
       </div>
-      <% }) %>
+      <% } else { %>
+      <div class="grid">
+        <% items.forEach(item => { %>
+        <div class="card">
+          <span class="badge"><%= item.category_name %></span>
+          <h3><%= item.name %></h3>
+          <p>
+            <strong><%= item.brand %></strong> | <%= item.country_of_origin %>
+          </p>
+          <p class="price">$<%= parseFloat(item.price).toFixed(2) %></p>
+          <p>
+            <% if (item.stock_quantity > 20) { %>
+            <span class="stock-indicator stock-high"
+              >Stock: <%= item.stock_quantity %></span
+            >
+            <% } else if (item.stock_quantity > 5) { %>
+            <span class="stock-indicator stock-medium"
+              >Stock: <%= item.stock_quantity %></span
+            >
+            <% } else { %>
+            <span class="stock-indicator stock-low"
+              >Stock: <%= item.stock_quantity %></span
+            >
+            <% } %>
+          </p>
+          <p><%= item.alcohol_percentage %>% ABV | <%= item.volume_ml %>ml</p>
+          <a href="/items/<%= item.id %>">View Details →</a>
+        </div>
+        <% }) %>
+      </div>
+      <% } %>
     </div>
-    <% } %>
   </div>
-</div>
+</main>
 
 <%- include('../partials/footer') %>

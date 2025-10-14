@@ -2,13 +2,15 @@ const express = require("express");
 const router = express.Router();
 const categoryController = require("../controllers/categoryController");
 
+// CREATE routes
+router.get("/new", categoryController.getCreateForm); 
+router.post("/", categoryController.createCategory); 
+
 // READ routes
 router.get("/", categoryController.getAllCategories);
 router.get("/:id", categoryController.getCategoryById);
 
-// CREATE routes
-router.get("/new", categoryController.getCreateForm); 
-router.post("/", categoryController.createCategory); 
+
 
 // UPDATE routes
 router.get("/:id/edit", categoryController.getEditForm);
