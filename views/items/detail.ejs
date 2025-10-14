@@ -1,0 +1,60 @@
+<%- include('../partials/header', { title: item.name }) %> <%-
+include('../partials/nav') %>
+
+<div class="container">
+  <div class="content-wrapper fade-in">
+    <div class="detail-header">
+      <div class="detail-info">
+        <span class="badge"><%= item.category_name %></span>
+        <h1><%= item.name %></h1>
+        <p><strong><%= item.brand %></strong></p>
+        <p class="price price-large">
+          $<%= parseFloat(item.price).toFixed(2) %>
+        </p>
+      </div>
+      <div class="detail-actions">
+        <a href="/items/<%= item.id %>/edit" class="btn btn-primary"
+          >Edit Item</a
+        >
+        <form
+          action="/items/<%= item.id %>/delete"
+          method="POST"
+          style="display: inline"
+          onsubmit="return confirm('Are you sure you want to delete this item?')"
+        >
+          <button type="submit" class="btn btn-danger">Delete</button>
+        </form>
+        <a href="/items" class="btn btn-secondary">Back to Items</a>
+      </div>
+    </div>
+
+    <div class="details-box">
+      <p>
+        <strong>Description:</strong>
+        <%= item.description || 'No description available' %>
+      </p>
+      <p>
+        <strong>Country of Origin:</strong>
+        <%= item.country_of_origin %>
+      </p>
+      <p>
+        <strong>Alcohol Content:</strong>
+        <%= item.alcohol_percentage %>% ABV
+      </p>
+      <p>
+        <strong>Volume:</strong>
+        <%= item.volume_ml %>ml
+      </p>
+      <p>
+        <strong>Stock:</strong>
+        <%= item.stock_quantity %> units
+      </p>
+      <p>
+        <strong>Added:</strong>
+        <%= new Date(item.created_at).toLocaleString() %>
+      </p>
+    </div>
+  </div>
+</div>
+
+<%- include('../partials/footer') %>
