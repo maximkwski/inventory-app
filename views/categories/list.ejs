@@ -1,0 +1,29 @@
+<%- include('../partials/header', { title: 'Categories' }) %> <%-
+include('../partials/nav') %>
+
+<div class="container">
+  <div class="content-wrapper fade-in">
+    <h1>📁 Categories</h1>
+    <a href="/categories/new" class="btn btn-success">➕ Add New Category</a>
+
+    <% if (categories.length === 0) { %>
+    <div class="empty-state">
+      <h2>No categories yet</h2>
+      <p>Start by creating your first category!</p>
+      <a href="/categories/new" class="btn btn-primary">Create Category</a>
+    </div>
+    <% } else { %>
+    <div class="grid">
+      <% categories.forEach(category => { %>
+      <div class="card">
+        <h3><%= category.name %></h3>
+        <p><%= category.description || 'No description' %></p>
+        <a href="/categories/<%= category.id %>">View Items →</a>
+      </div>
+      <% }) %>
+    </div>
+    <% } %>
+  </div>
+</div>
+
+<%- include('../partials/footer') %>

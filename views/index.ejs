@@ -1,11 +1,14 @@
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Homepage</title>
-  </head>
-  <body>
-    <h1>Hello World!</h1>
-  </body>
-</html>
+<%- include('partials/header', { title: 'Liquor Store Inventory' }) %>
+
+<div class="hero">
+  <div class="hero-content fade-in">
+    <h1>🍷 Liquor Store Inventory</h1>
+    <p>Manage your beer, wine, and liquor inventory with ease</p>
+    <div class="btn-group">
+      <a href="/categories" class="btn btn-primary">Browse Categories</a>
+      <a href="/items" class="btn btn-success">View All Items</a>
+    </div>
+  </div>
+</div>
+
+<%- include('partials/footer') %>
